@@ -1,12 +1,11 @@
 import { Conteiner } from "./styled";
-import Login from "./pages/login";
+import Router from "./routes"
 
 function App() {
   
   return (
     <Conteiner>
-      <Login></Login>
-      
+      <Router/>      
     </Conteiner>
   );
 }
