@@ -1,10 +1,14 @@
 import { Conteiner, Burguer, Kenzie } from "./styled";
 
-const Logo = () => {
+interface LogoProps{
+    width:number;
+};
+
+const Logo = ({width}: LogoProps) => {
     return (
         <Conteiner>
-            <Burguer>Burguer</Burguer>
-            <Kenzie>Kenzie</Kenzie>
+            <Burguer width = {width}>Burguer</Burguer>
+            <Kenzie width = {width}>Kenzie</Kenzie>
         </Conteiner>
     );
 };

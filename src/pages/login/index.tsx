@@ -4,29 +4,30 @@ import {
   IconConteiner,
   RegisterConteiner,
   Form,
-  LogoConteiner
+  LogoConteiner,
 } from "./styled";
 import Logo from "../../components/logo";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import Input from "../../components/input";
 import Button from "../../components/button";
 import { useRequest } from "../../provider/request";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { login, register } = useRequest();
+  const { login } = useRequest();
+  const navegate = useNavigate();
 
   const loging = () => {
     login({ email: "asd", password: "qwe" });
   };
-
   const goToRegistration = () => {
-    console.log("foi para cadrastro");
+    navegate("signup");
   };
 
   return (
     <Conteiner>
       <LogoConteiner>
-        <Logo />
+        <Logo width = {26}/>
         <ContinerDisc>
           <IconConteiner>
             <RiShoppingBag3Line />

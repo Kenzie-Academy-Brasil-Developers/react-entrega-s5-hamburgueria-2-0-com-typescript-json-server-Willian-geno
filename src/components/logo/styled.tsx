@@ -1,22 +1,26 @@
 import styled from "styled-components";
 
+interface LogoStylesProps {
+    width:number;
+}
+
 export const Conteiner = styled.div`
     display: flex;
     
 `
 
-export const Burguer = styled.div`
-    font-size: 26px;
+export const Burguer = styled.div<LogoStylesProps>`
+    font-size: ${(props) => props.width}px;
     font-weight: bold;
     color: var(--color-grey-600);
-    margin: 0 5px 0 0;
+    margin: 0 4px 0 0;
 `
 
-export const Kenzie = styled.div`
-    font-size: 22px;
+export const Kenzie = styled.div<LogoStylesProps>`
+    font-size: ${(props) => props.width -4}px;
     font-weight: bold;
     color: var(--color-red);
     position: relative;
-    top:12px;
+    top:${(props) => props.width/2}px;
     margin: 0 0 0 4px;
 `

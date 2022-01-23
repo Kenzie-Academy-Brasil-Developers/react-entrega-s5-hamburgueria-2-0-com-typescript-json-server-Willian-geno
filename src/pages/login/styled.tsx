@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Conteiner = styled.div`
-  padding: 30px 5%;
+  padding: 30px 5% 0 5%;
 
   @media screen and (min-width: 900px){
     height: 100vh;
@@ -57,16 +57,16 @@ export const Form = styled.div`
   border-radius: 10px;
   background-color: var(--color-gray-100);
   padding: 30px 10px 0 10px ;
-  margin: 0 20px 0 0;
   max-width: 400px;
-
-
+  
+  
   label {
     font-weight: bold;
     margin-bottom: 15px;
     color: var(--color-grey-600);
   }
   @media screen and (min-width: 900px){
+    margin: 0 20px 0 0;
   }
 `;
 
