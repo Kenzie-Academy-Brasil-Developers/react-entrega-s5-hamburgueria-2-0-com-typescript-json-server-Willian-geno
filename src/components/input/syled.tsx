@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import { FieldError } from "react-hook-form";
 
-export const Conteiner = styled.div`
+interface ConteinerInmputProps {
+    err:string | null;
+}
+
+export const Conteiner = styled.div<ConteinerInmputProps>`
     margin: 15px 0 0 0; 
     border:2px solid;
-    border-color: var(--color-grey-600);
+    border-color: ${(props) => props.err ? "var(--color-negative)" : "var(--color-grey-600)"};
     border-radius: 5px;
     height: 45px;
     display: flex;
@@ -30,7 +35,7 @@ export const ConteinerInput = styled.div`
     }
 `
 
-export const Label = styled.div`
+export const Label = styled.div<ConteinerInmputProps>`
     width: fit-content;
     position: relative;
     top: -14.5px;
@@ -38,5 +43,5 @@ export const Label = styled.div`
     background-color: white;
     padding: 0 6px 0 6px ;
     font-size: 12px;
-    color: var(--color-grey-300);
+    color: ${(props) => props.err ? "var(--color-negative)" : "var(--color-grey-300)"};
 `

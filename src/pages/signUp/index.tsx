@@ -14,22 +14,51 @@ import { useRequest } from "../../provider/request";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import Logo from "../../components/logo";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+interface useFormProps {
+  email: string;
+  name: string;
+  password: string;
+  passwordConfirmation: string;
+}
 
 const SignUp = () => {
-  const { register } = useRequest();
+  const { registering } = useRequest();
 
-  const registering = () => {
-    register({
-      email: "dasdasd",
-      name: "willian",
-      password: "123456",
-    });
+  const shema = yup.object().shape({
+    email: yup.string().required("Campo Obrigatorio").email("Email invalido"),
+    name: yup.string().required("Campo Obrigatorio"),
+    password: yup.string().required("Campo Obrigatorio"),
+    passwordConfirmation: yup
+      .string()
+      .required("Campo Obrigatorio")
+      .oneOf([yup.ref("password"), null], "Senhas diferentes"),
+  });
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<useFormProps>({
+    resolver: yupResolver(shema),
+  });
+
+  const handle = (data: useFormProps) => {
+    const requi = {
+      name:data.name,
+      email:data.email,
+      password:data.password,
+    }
+    registering(requi);
   };
 
   return (
     <Conteiner>
       <LogoConteiner>
-        <Logo width={26}/>
+        <Logo width={26} />
         <ContinerDisc>
           <IconConteiner>
             <RiShoppingBag3Line />
@@ -47,25 +76,45 @@ const SignUp = () => {
           <p>Cadastro</p>
           <Link to="/">Retorne para o login</Link>
         </TitleConteiner>
-        <Form>
-          <Input placeholder="Digite seu nome" label="Nome" />
-          <MenssagerError>Nome Obrigatorio</MenssagerError>
-          <Input placeholder="Digite seu Email" label="Email" />
-          <MenssagerError></MenssagerError>
-          <Input placeholder="Digite sua senha" label="Senha" />
-          <MenssagerError></MenssagerError>
+        <Form onSubmit={handleSubmit(handle)}>
           <Input
-            placeholder="Confirme sua senha"
-            label="Confirmação da Senha"
+            label="Email"
+            placeholder="Degite seu email"
+            register={register}
+            name="email"
+            error={errors.email?.message}
           />
-          <MenssagerError></MenssagerError>
 
-          <Button
-            name="Cadastrar"
-            funcao={registering}
-            color="#999999"
-            backgroundColor="#f5f5f5"
+          <MenssagerError>{errors.email?.message}</MenssagerError>
+
+          <Input
+            label="Nome"
+            placeholder="Degite seu nome"
+            register={register}
+            name="name"
+            error={errors.name?.message}
           />
+          <MenssagerError>{errors.name?.message}</MenssagerError>
+          <Input
+            label="Senha"
+            placeholder="Degite sua senha"
+            register={register}
+            name="password"
+            error={errors.password?.message}
+          />
+          <MenssagerError>{errors.password?.message}</MenssagerError>
+          <Input
+            label="Confirmação de senha"
+            placeholder="confirme seua senha"
+            register={register}
+            name="passwordConfirmation"
+            error={errors.passwordConfirmation?.message}
+          />
+          <MenssagerError>
+            {errors.passwordConfirmation?.message}
+          </MenssagerError>
+
+          <Button name="Cadastrar" color="#999999" backgroundColor="#f5f5f5" />
         </Form>
       </RegisterConteiner>
     </Conteiner>

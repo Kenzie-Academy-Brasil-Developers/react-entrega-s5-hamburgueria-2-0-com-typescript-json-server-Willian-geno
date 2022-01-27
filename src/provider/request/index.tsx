@@ -1,4 +1,7 @@
-import { useContext, createContext, ReactNode } from "react";
+import axios from "axios";
+import { useContext, createContext, ReactNode, useState } from "react";
+import { api } from "../../services";
+import {useNavigate} from "react-router-dom"
 
 interface RequestProvidersPropsLogin {
   email: string;
@@ -15,29 +18,58 @@ interface RequestProps {
   children: ReactNode;
 }
 
+
+
 interface RequestPoviderData {
   login: (data: RequestProvidersPropsLogin) => void;
   logof: () => void;
-  register: (data: RequestProvidersPropsRegister) => void;
+  registering: (data: RequestProvidersPropsRegister) => void;
+  isLogadoFunction: () => void;
+ 
 }
 
 const RequestContext = createContext<RequestPoviderData>({} as RequestPoviderData);
 
 export const RequestProvider = ({children} : RequestProps) => {
+
+  const [isLogado, setIsLogado] = useState(false);
+  const navegate = useNavigate();
+  
   const login = (data: RequestProvidersPropsLogin) => {
-    console.log("logado", data);
+    console.log(data)
+    api.post("login",data)
+    .then(response => {
+      localStorage.setItem("@Hamburgueria::token", JSON.stringify(response.data.accessToken));
+      localStorage.setItem("@Hamburgueria::userId", JSON.stringify(response.data.user.id));
+      navegate("/dashboard");
+      setIsLogado(true)
+    });
   };
 
   const logof = () => {
-    console.log("deslogado");
+    localStorage.clear();
+    setIsLogado(false)
+    navegate("/");
   };
 
-  const register = (data: RequestProvidersPropsRegister) => {
-    console.log("registrago", data);
+  const registering = (data: RequestProvidersPropsRegister) => {
+
+    api.post("register", data)
+    .then(response => {
+      navegate("/")
+    })
   };
+
+  const isLogadoFunction = () =>{
+    const token = localStorage.getItem("@Hamburgueria::token")
+    console.log(token)
+    if (!token){
+      navegate("/")
+    }
+  }
 
   return (
-    <RequestContext.Provider value={{ login, logof, register }}>
+    <RequestContext.Provider value={{ login, logof, registering,isLogadoFunction  }}>
       {children}
     </RequestContext.Provider>
   );

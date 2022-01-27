@@ -11,7 +11,9 @@ export const Harder = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 8px;
+  padding: 0 3%;
+  position: fixed;
+  width: 94%;
 
   @media screen and (min-width:900px){
     padding: 0 35px;
@@ -51,11 +53,13 @@ export const InputSerch = styled.div<InputSerchProps>`
     display: flex;
 
     width: 350px;
-    left: 52%;
-    padding: 0 0.3%;
+    left: 53%;
+    padding: 0 0.2%;
     top: 8px;
   }
 
+  
+  }
   input {
     box-shadow: 0 0 0 0;
     border: 0 none;
@@ -73,5 +77,27 @@ export const InputSerch = styled.div<InputSerchProps>`
     @media screen and (min-width: 900px){
 
     }
-  }
+  
 `;
+
+export const CardsConteiner = styled.div`
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (min-width:900px){
+    padding: 80px 5%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    
+  }
+`
+export const Langht = styled.div`
+  background-color: var(--color-green);
+  position: relative;
+  top: 0;
+  width: 4px;
+
+`

@@ -4,7 +4,7 @@ import { useRequest } from "../../provider/request";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   name: string;
-  funcao: () => void;
+  funcao?: (intem?:any) => void;
   color: string;
   backgroundColor: string;
 }
@@ -19,7 +19,7 @@ const Button = ({
   const { logof } = useRequest();
   return (
     <Conteiner
-    type="button"
+    type="submit"
     onClick={funcao}
     color={color}
     backgroundColor={backgroundColor} 

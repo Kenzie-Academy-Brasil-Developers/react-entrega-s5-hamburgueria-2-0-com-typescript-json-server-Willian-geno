@@ -28,7 +28,7 @@ export const TitleConteiner = styled.div`
   }
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   margin: 40px 0 0 0;
 `;
 

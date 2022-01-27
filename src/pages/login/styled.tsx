@@ -52,7 +52,7 @@ export const RegisterConteiner = styled.div`
     }
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   border: 1px solid var(--color-grey-100);
   border-radius: 10px;
   background-color: var(--color-gray-100);

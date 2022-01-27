@@ -16,6 +16,12 @@ export const Conteiner = styled.button<colors>`
     color: ${(props) => props.color};
     background-color: ${(props) => props.backgroundColor};
     font-size: 18px;
-    
+
+    :active{
+        opacity: 0.8;
+    }
+    :hover{
+        cursor: pointer;
+    }
     
 `
